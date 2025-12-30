@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Бусички ✨</title>
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(180deg, #0b1d13, #0f0f0f);
+      color: #f5f5f5;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      font-size: 2.6em;
+      margin-top: 40px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+    
+    .subtitle {
+      opacity: 0.85;
+      margin-bottom: 30px;
+    }
+    
+    img {
+      width: 100%;
+      border-radius: 20px;
+      margin: 25px 0 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+    
+    p {
+      opacity: 0.9;
+    }
+    
+    .text {
+      font-size: 1.1em;
+      line-height: 1.7;
+      margin: 40px 0;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+    }
+    
+    .music-btn {
+      display: block;
+      padding: 16px;
+      margin: 20px 0 35px;
+      background: linear-gradient(135deg, #b31b1b, #7a1212);
+      border-radius: 14px;
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      box-shadow: 0 8px 20px rgba(179, 27, 27, 0.4);
+    }
+    
+    .music-btn:hover {
+      opacity: 0.9;
+    }
+    
+    .footer {
+      margin: 40px 0 20px;
+      font-size: 0.9em;
+      opacity: 0.7;
+    }
+    
+    /* ❄️ СНЕГ */
+    .snow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      color: white;
+      font-size: 12px;
+      opacity: 0.8;
+      animation: fall linear infinite;
+    }
+    
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  
+  <div class="snow" id="snow"></div>
+  
+  <div class="container" style="position:relative; z-index:2;">
+    
+    <h1>🎄 Бусички ✨</h1>
+    <div class="subtitle">Наша маленькая новогодняя история</div>
+    
+   <a href="https://music.youtube.com/watch?v=z1N52_9FSOs&si=ta7OTQUzCaV3R67r" target="_blank"
+style="
+display:block;
+padding:15px;
+margin:20px 0;
+background:#1c1c1c;
+border-radius:12px;
+text-decoration:none;
+color:white;
+font-size:16px;
+">
+🎶 Включи музыку и листай 🤍
+</a>
+    
+    <img src="<a href="https://ibb.co/dsfbzNgC"><img src="https://i.ibb.co/Kc5N3tw4/IMG-9164.jpg" alt="IMG-9164" border="0"></a>">
+    <p>Здесь — мы такие, какие есть</p>
+    
+    <img src="<a href="https://ibb.co/svm7qKcx"><img src="https://i.ibb.co/HDFZqtRw/IMG-9292.jpg" alt="IMG-9292" border="0"></a>">
+    <p>Ты всегда будешь для меня самой прекрасной</p>
+    
+    <img src="<a href="https://ibb.co/KxLNKGtZ"><img src="https://i.ibb.co/PG9TDY2p/IMG-7176.jpg" alt="IMG-7176" border="0"></a>">
+    <p>И самой сексуальной</p>
+    
+    <div class="text">
+      Этот год стал особенным, потому что в нём появилась ты.<br><br>
+      Спасибо за тепло, заботу и любовь.<br><br>
+      С Новым годом, моя бусичка 🤍<br>
+      Пусть впереди будет ещё больше нас.
+    </div>
+    
+    <div class="footer">
+      С любовью, только для тебя 🎁
+    </div>
+    
+  </div>
+  
+  <script>
+    const snowContainer = document.getElementById('snow');
+    
+    for (let i = 0; i < 35; i++) {
+      const snowflake = document.createElement('div');
+      snowflake.className = 'snowflake';
+      snowflake.innerHTML = '❄';
+      snowflake.style.left = Math.random() * 100 + 'vw';
+      snowflake.style.animationDuration = (5 + Math.random() * 10) + 's';
+      snowflake.style.fontSize = (10 + Math.random() * 10) + 'px';
+      snowflake.style.opacity = Math.random();
+      snowContainer.appendChild(snowflake);
+    }
+  </script>
+  
+</body>
+
+</html>
