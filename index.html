@@ -16,6 +16,28 @@
       overflow-x: hidden;
     }
     
+    /* ГИРЛЯНДА */
+    .lights {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      z-index: 1000;
+      background: radial-gradient(circle, #ff0000 20%, transparent 20%),
+                  radial-gradient(circle, #00ff00 20%, transparent 20%),
+                  radial-gradient(circle, #0000ff 20%, transparent 20%),
+                  radial-gradient(circle, #ffff00 20%, transparent 20%);
+      background-size: 40px 10px;
+      background-position: 0 0, 10px 0, 20px 0, 30px 0;
+      animation: lightMove 1s infinite linear;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+    @keyframes lightMove {
+      from { background-position: 0 0, 10px 0, 20px 0, 30px 0; }
+      to { background-position: 40px 0, 50px 0, 60px 0, 70px 0; }
+    }
+
     .container {
       max-width: 600px;
       margin: auto;
@@ -24,93 +46,60 @@
     
     h1 {
       font-size: 2.6em;
-      margin-top: 40px;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+      margin-top: 60px;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
     }
     
-    .subtitle {
-      opacity: 0.85;
-      margin-bottom: 30px;
+    /* ЭФФЕКТ ПОЯВЛЕНИЯ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease-out;
     }
-    
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     img {
       width: 100%;
       border-radius: 20px;
       margin: 25px 0 10px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
     
-    p {
-      opacity: 0.9;
-    }
-    
-    .text {
-      font-size: 1.1em;
-      line-height: 1.7;
-      margin: 40px 0;
-      padding: 25px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-    }
-
-    /* СТИЛИ ДЛЯ КНОПКИ ПОЖЕЛАНИЙ */
-    .wish-container {
-      margin: 40px 0;
-      padding: 20px;
-    }
-    
+    .wish-container { margin: 40px 0; }
     #wish-btn {
       background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-      border: none;
-      padding: 15px 25px;
-      border-radius: 50px;
-      color: #4a4a4a;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 16px;
+      border: none; padding: 15px 25px; border-radius: 50px;
+      color: #4a4a4a; font-weight: bold; cursor: pointer;
       box-shadow: 0 4px 15px rgba(255, 154, 158, 0.4);
-      transition: transform 0.2s;
     }
-    
-    #wish-btn:active {
-      transform: scale(0.95);
+    #wish-output { margin-top: 20px; color: #ffb3ba; min-height: 1.5em; transition: opacity 0.5s; }
+
+    .text {
+      font-size: 1.1em; line-height: 1.7; margin: 40px 0; padding: 25px;
+      background: rgba(255, 255, 255, 0.05); border-radius: 20px;
     }
-    
-    #wish-output {
-      margin-top: 20px;
-      font-size: 1.2em;
-      font-style: italic;
-      color: #ffb3ba;
-      min-height: 1.5em;
-      transition: opacity 0.5s;
+
+    /* СЕКРЕТНОЕ ПОСЛАНИЕ */
+    .secret-box { margin: 50px 0; }
+    #gift-icon {
+      font-size: 50px; cursor: pointer; display: inline-block;
+      transition: transform 0.3s;
     }
-    
-    .footer {
-      margin: 40px 0 20px;
-      font-size: 0.9em;
-      opacity: 0.7;
+    #gift-icon:hover { transform: scale(1.2) rotate(10deg); }
+    #secret-text {
+      display: none; margin-top: 20px; padding: 20px;
+      border: 2px dashed #ff9a9e; border-radius: 15px;
+      background: rgba(255, 154, 158, 0.1);
+      animation: fadeIn 1s;
     }
-    
-    /* ❄️ СНЕГ */
-    .snow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-    
-    .snowflake {
-      position: absolute;
-      top: -10px;
-      color: white;
-      font-size: 12px;
-      opacity: 0.8;
-      animation: fall linear infinite;
-    }
-    
+    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+
+    /* СНЕГ */
+    .snow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+    .snowflake { position: absolute; top: -10px; color: white; animation: fall linear infinite; }
     @keyframes fall {
       0% { transform: translateY(-10vh) translateX(0px); }
       50% { transform: translateY(50vh) translateX(20px); }
@@ -120,48 +109,57 @@
 </head>
 
 <body>
-  
+  <div class="lights"></div>
   <div class="snow" id="snow"></div>
   
   <div class="container" style="position:relative; z-index:2;">
     
-    <h1>🎄 Бусички ✨</h1>
-    <div class="subtitle">Наша маленькая новогодняя история</div>
+    <h1 class="reveal">🎄 Бусички ✨</h1>
+    <div class="subtitle reveal">Наша маленькая новогодняя история</div>
     
     <a href="https://music.youtube.com/watch?v=z1N52_9FSOs&si=ta7OTQUzCaV3R67r" target="_blank"
-       style="display:block; padding:15px; margin:20px 0; background:#1c1c1c; border-radius:12px; text-decoration:none; color:white; font-size:16px;">
+       style="display:block; padding:15px; margin:20px 0; background:#1c1c1c; border-radius:12px; text-decoration:none; color:white;">
       🎶 Включи музыку и листай 🤍
     </a>
     
-    <img src="https://i.ibb.co/Kc5N3tw4/IMG-9164.jpg" alt="IMG-9164">
-    <p>Здесь — мы такие, какие есть</p>
+    <div class="reveal">
+        <img src="https://i.ibb.co/Kc5N3tw4/IMG-9164.jpg" alt="IMG-9164">
+        <p>Здесь — мы такие, какие есть</p>
+    </div>
     
-    <img src="https://i.ibb.co/HDFZqtRw/IMG-9292.jpg" alt="IMG-9292">
-    <p>Ты всегда будешь для меня самой прекрасной</p>
+    <div class="reveal">
+        <img src="https://i.ibb.co/HDFZqtRw/IMG-9292.jpg" alt="IMG-9292">
+        <p>Ты всегда будешь для меня самой прекрасной</p>
+    </div>
     
-    <img src="https://i.ibb.co/PG9TDY2p/IMG-7176.jpg" alt="IMG-7176">
-    <p>И самой сексуальной</p>
+    <div class="reveal">
+        <img src="https://i.ibb.co/PG9TDY2p/IMG-7176.jpg" alt="IMG-7176">
+        <p>И самой сексуальной</p>
+    </div>
     
-    <div class="wish-container">
-      <button id="wish-btn">Нажми, чтобы получить предсказание на 2026 🎄</button>
+    <div class="wish-container reveal">
+      <button id="wish-btn">Нажми для предсказания на 2026 🎄</button>
       <p id="wish-output"></p>
     </div>
 
-    <div class="text">
+    <div class="text reveal">
       Этот год стал особенным, потому что в нём появилась ты.<br><br>
       Спасибо за тепло, заботу и любовь.<br><br>
-      С Новым годом, моя бусичка 🤍<br>
-      Пусть впереди будет ещё больше нас.
+      С Новым годом, моя бусичка 🤍
+    </div>
+
+    <div class="secret-box reveal">
+        <div id="gift-icon">🎁</div>
+        <div id="secret-text">
+            <h3>Оставайся всегда собой, самой прекрасной бусичкой на свете ❤️</h3>
+        </div>
     </div>
     
-    <div class="footer">
-      С любовью, только для тебя 🎁
-    </div>
-    
+    <div class="footer">С любовью, только для тебя 🎁</div>
   </div>
   
   <script>
-    // ЛОГИКА СНЕГА
+    // СНЕГ
     const snowContainer = document.getElementById('snow');
     for (let i = 0; i < 35; i++) {
       const snowflake = document.createElement('div');
@@ -174,30 +172,53 @@
       snowContainer.appendChild(snowflake);
     }
 
+    // ПОЯВЛЕНИЕ ПРИ СКРОЛЛЕ
+    function reveal() {
+      var reveals = document.querySelectorAll(".reveal");
+      for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        if (elementTop < windowHeight - 50) {
+          reveals[i].classList.add("active");
+        }
+      }
+    }
+    window.addEventListener("scroll", reveal);
+    reveal(); // Запуск при загрузке
+
     // ЛОГИКА ПОЖЕЛАНИЙ
     const wishes = [
-      "Этот год принесёт нам еще больше путешествий! ✈️",
-      "В 2026-м я буду любить тебя еще сильнее ❤️",
-      "Нас ждёт море обнимашек и тёплых вечеров ☕",
-      "Ты — моё главное достижение этого года 🌟",
-      "В новом году исполнится твоя самая заветная мечта ✨",
-      "Обещаю радовать тебя приятными сюрпризами чаще 🥐",
-      "Этот год будет таким же ярким, как твоя улыбка 💖",
-      "Мы построим еще больше крутых планов вместе! 🏠"
+          // ЛОГИКА ПОЖЕЛАНИЙ (ЛЕГКИЕ И УЮТНЫЕ)
+    const wishes = [
+      "В 2026 буду стараться быть более умнее, что бы не бесить тебя 🧠",
+      "Буду стараться в новом году лучше подбирать фильмы на вечер🎬",
+      "Уже 3 года терпим друг друга... предлагаю продлить этот контракт ещё лет на 100! ✨",
+      "В новом году обнимашек будет в 3 раза больше (хотя куда уж больше) 🧸",
+      "План на 2026: побольше вкусной еды и поменьше стресса 🍕",
+      "Вот уже 3 год ты находишь ключ к моему сердцу 🔑",
+      "Пусть в 2026-м твоё 'мне нечего надеть' решается само собой за 5 минут 👗",
+      "В новом году обещаю всегда делиться всеми вкусняшками ❤️",
+      "3 года вместе — полёт нормальный! Продолжаем бесить друг друга с любовью 🚀",
+      "Желаю тебе в 2026-м такого же терпения, как в те моменты, когда я туплю 😅"
     ];
 
-    const wishBtn = document.getElementById('wish-btn');
-    const wishOutput = document.getElementById('wish-output');
+    ];
 
-    wishBtn.addEventListener('click', () => {
-      wishOutput.style.opacity = 0;
+    document.getElementById('wish-btn').addEventListener('click', function() {
+      const out = document.getElementById('wish-output');
+      out.style.opacity = 0;
       setTimeout(() => {
-        const randomIndex = Math.floor(Math.random() * wishes.length);
-        wishOutput.innerText = wishes[randomIndex];
-        wishOutput.style.opacity = 1;
+        out.innerText = wishes[Math.floor(Math.random() * wishes.length)];
+        out.style.opacity = 1;
       }, 300);
     });
+
+    // СЕКРЕТНЫЙ ПОДАРОК
+    document.getElementById('gift-icon').addEventListener('click', function() {
+        const text = document.getElementById('secret-text');
+        text.style.display = (text.style.display === 'block') ? 'none' : 'block';
+        this.innerHTML = (text.style.display === 'block') ? '✨' : '🎁';
+    });
   </script>
-  
 </body>
 </html>
